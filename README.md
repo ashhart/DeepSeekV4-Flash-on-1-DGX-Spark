@@ -88,6 +88,13 @@ big context can exceed a 2-minute default, and if the client auto-retries on tim
 get a retry storm that pins the box. Also don't let an agent conversation grow to ~150K
 tokens — at that depth every thinking turn is minutes; start fresh / compact context.
 
+**Loop guard (Pi agent).** Local models like DS4 Flash occasionally fall into a tight
+loop — repeating a failed command, cycling between two edits, or spinning on retries. If
+you drive it with the [Pi](https://pi.dev) coding agent, **[pi-doomloop](https://github.com/ashhart/pi-doomloop)**
+is a recovery-only extension that watches for this and sends a short steering nudge to
+break the pattern. It never blocks or aborts a tool call — it only nudges — so it's safe
+to leave on for long, legitimate jobs.
+
 ---
 
 ## 5. (Optional) Hot-swap behind one endpoint — llama-swap + OpenWebUI
